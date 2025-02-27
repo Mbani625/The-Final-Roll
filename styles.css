@@ -336,7 +336,7 @@ header {
     .player {
         width: 80%;
         height: auto;
-        padding: 15px;
+        padding: 10px;
     }
 
     .player-buttons {
@@ -345,7 +345,7 @@ header {
     }
 
     .icon-button, .life-adjust-button {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
     }
 }
