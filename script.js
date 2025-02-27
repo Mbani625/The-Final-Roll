@@ -25,12 +25,14 @@ function initializeGame(playerCount) {
 
     if (playerCount === 2) {
         container.className = "players-grid players-2";
+        createPlayer(1);
+        createPlayer(2);
     } else {
         container.className = "players-grid players-4";
-    }
-
-    for (let i = 1; i <= playerCount; i++) {
-        createPlayer(i);
+        createPlayer(1);
+        createPlayer(2);
+        createPlayer(4); // Switched order
+        createPlayer(3); // Switched order
     }
 }
 
@@ -43,7 +45,9 @@ function createPlayer(playerId) {
         <h2>Player ${playerId}</h2>
         <div class="life-total" onclick="openLifeInput(${playerId})">8000</div>
 
-        <div class="buttons">
+        <div class="player-buttons">
+            <button class="life-adjust-button" onmousedown="startLifeAdjust(${playerId}, 1)" onmouseup="stopLifeAdjust()" onmouseleave="stopLifeAdjust()" ontouchstart="startLifeAdjust(${playerId}, 1)" ontouchend="stopLifeAdjust()">+1</button>
+
             <button class="icon-button" onclick="rollDice(${playerId}, 6)">
                 <img src="path-to-d6-icon.png" alt="D6">
             </button>
@@ -56,10 +60,7 @@ function createPlayer(playerId) {
             <button class="icon-button" onclick="invertPlayer(${playerId})">
                 <img src="invert icon.png" alt="Invert">
             </button>
-        </div>
 
-        <div class="life-buttons">
-            <button class="life-adjust-button" onmousedown="startLifeAdjust(${playerId}, 1)" onmouseup="stopLifeAdjust()" onmouseleave="stopLifeAdjust()" ontouchstart="startLifeAdjust(${playerId}, 1)" ontouchend="stopLifeAdjust()">+1</button>
             <button class="life-adjust-button" onmousedown="startLifeAdjust(${playerId}, -1)" onmouseup="stopLifeAdjust()" onmouseleave="stopLifeAdjust()" ontouchstart="startLifeAdjust(${playerId}, -1)" ontouchend="stopLifeAdjust()">-1</button>
         </div>
     `;
@@ -154,7 +155,10 @@ function rollDice(playerId, diceType) {
 }
 
 function invertPlayer(playerId) {
-    document.querySelector(`[data-player-id="${playerId}"]`).classList.toggle("inverted");
+    let playerDiv = document.querySelector(`[data-player-id="${playerId}"]`);
+    if (playerDiv) {
+        playerDiv.classList.toggle("inverted");
+    }
 }
 
 // Change Life Using Pop-up
