@@ -125,13 +125,22 @@ function setGameMode(mode) {
 
 // Rapidly Adjust Life on Hold (Now Works on PC & Mobile)
 let interval = null;
+let holdTime = 500; // Start with 500ms delay (slower at first)
+
 function startLifeAdjust(playerId, amount) {
     adjustLife(playerId, amount);
-    interval = setInterval(() => adjustLife(playerId, amount), 150);
+    
+    holdTime = 500; // Reset speed delay
+
+    interval = setTimeout(function repeat() {
+        adjustLife(playerId, amount);
+        holdTime = Math.max(holdTime * 0.85, 100); // Gradually speed up but cap at 100ms
+        interval = setTimeout(repeat, holdTime);
+    }, holdTime);
 }
 
 function stopLifeAdjust() {
-    clearInterval(interval);
+    clearTimeout(interval);
 }
 
 function flipCoin(playerId) {
