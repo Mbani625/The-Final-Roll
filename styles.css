@@ -334,7 +334,7 @@ header {
 /* Responsive Design */
 @media (max-width: 600px) {
     .player {
-        width: 100%;
+        width: 80%;
         height: auto;
         padding: 15px;
     }
