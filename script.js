@@ -127,6 +127,7 @@ function setGameMode(mode) {
 // Rapidly Adjust Life on Hold (Now Works on PC & Mobile)
 let interval = null;
 let holdTime = 500; // Start with 500ms delay (slower at first)
+let tapDelay = 250; // Prevents accidental double inputs on tap
 
 function startLifeAdjust(playerId, amount) {
     adjustLife(playerId, amount);
@@ -142,6 +143,24 @@ function startLifeAdjust(playerId, amount) {
 
 function stopLifeAdjust() {
     clearTimeout(interval);
+}
+
+// Updated to prevent double input on tap
+function singleLifeAdjust(playerId, amount) {
+    if (!document.getElementById(`life-btn-${playerId}-${amount}`).disabled) {
+        adjustLife(playerId, amount);
+        disableTapTemporarily(playerId, amount);
+    }
+}
+
+function disableTapTemporarily(playerId, amount) {
+    let button = document.getElementById(`life-btn-${playerId}-${amount}`);
+    if (button) {
+        button.disabled = true;
+        setTimeout(() => {
+            button.disabled = false;
+        }, tapDelay);
+    }
 }
 
 function flipCoin(playerId) {
