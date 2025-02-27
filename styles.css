@@ -9,8 +9,8 @@ body {
 }
 
 .container {
-    max-width: 850px;
-    margin: auto;
+    max-width: 800px;
+    margin: auto 50px;
     padding: 20px;
 }
 
@@ -333,6 +333,10 @@ header {
 
 /* Responsive Design */
 @media (max-width: 600px) {
+    .container {
+        margin: auto 30px;
+    }
+    
     .player {
         width: 80%;
         height: auto;
