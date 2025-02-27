@@ -10,7 +10,7 @@ body {
 
 .container {
     max-width: 800px;
-    margin: auto 50px;
+    margin: auto;
     padding: 20px;
 }
 
