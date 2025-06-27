@@ -395,7 +395,7 @@ header {
 /* Responsive Design */
 @media (max-width: 600px) {
   .container {
-    margin: auto 50px;
+    margin: auto 55px;
   }
 
   .player {

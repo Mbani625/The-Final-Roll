@@ -59,30 +59,60 @@ function createPlayer(playerId) {
   playerDiv.dataset.playerId = playerId;
 
   playerDiv.innerHTML = `
-        <h2>Player ${playerId}</h2>
-        <div class="life-total" onclick="openLifeInput(${playerId})">8000</div>
+    <h2>Player ${playerId}</h2>
+    <div class="life-total" onclick="openLifeInput(${playerId})">8000</div>
 
-        <div class="player-buttons">
-            <button class="life-adjust-button" onmousedown="startLifeAdjust(${playerId}, 1)" onmouseup="stopLifeAdjust()" onmouseleave="stopLifeAdjust()" ontouchstart="startLifeAdjust(${playerId}, 1)" ontouchend="stopLifeAdjust()">+1</button>
+    <div class="player-buttons">
+        <button class="life-adjust-button">+1</button>
 
-            <button class="icon-button" onclick="rollDice(${playerId}, 6)">
-                <img src="path-to-d6-icon.png" alt="D6">
-            </button>
-            <button class="icon-button" onclick="rollDice(${playerId}, 20)">
-                <img src="path-to-d20-icon.png" alt="D20">
-            </button>
-            <button class="icon-button" onclick="flipCoin(${playerId})">
-                <img src="path-to-coin-icon.png" alt="Coin Flip">
-            </button>
-            <button class="icon-button" onclick="invertPlayer(${playerId})">
-                <img src="invert icon.png" alt="Invert">
-            </button>
+        <button class="icon-button" onclick="rollDice(${playerId}, 6)">
+            <img src="path-to-d6-icon.png" alt="D6">
+        </button>
+        <button class="icon-button" onclick="rollDice(${playerId}, 20)">
+            <img src="path-to-d20-icon.png" alt="D20">
+        </button>
+        <button class="icon-button" onclick="flipCoin(${playerId})">
+            <img src="path-to-coin-icon.png" alt="Coin Flip">
+        </button>
+        <button class="icon-button" onclick="invertPlayer(${playerId})">
+            <img src="invert icon.png" alt="Invert">
+        </button>
 
-            <button class="life-adjust-button" onmousedown="startLifeAdjust(${playerId}, -1)" onmouseup="stopLifeAdjust()" onmouseleave="stopLifeAdjust()" ontouchstart="startLifeAdjust(${playerId}, -1)" ontouchend="stopLifeAdjust()">-1</button>
-        </div>
-    `;
+        <button class="life-adjust-button">-1</button>
+    </div>
+  `;
 
   document.getElementById("players-container").appendChild(playerDiv);
+
+  // ✅ Clean event handling to avoid double tap
+  setTimeout(() => {
+    const playerElem = document.querySelector(`[data-player-id="${playerId}"]`);
+    const buttons = playerElem.querySelectorAll(".life-adjust-button");
+
+    buttons.forEach((btn) => {
+      const amount = btn.textContent.includes("+") ? 1 : -1;
+
+      const start = () => {
+        if (!btn.dataset.holding) {
+          startLifeAdjust(playerId, amount);
+          btn.dataset.holding = "true";
+        }
+      };
+
+      const stop = () => {
+        if (btn.dataset.holding === "true") {
+          stopLifeAdjust();
+          btn.dataset.holding = "";
+        }
+      };
+
+      btn.addEventListener("touchstart", start, { passive: true });
+      btn.addEventListener("touchend", stop);
+      btn.addEventListener("mousedown", start);
+      btn.addEventListener("mouseup", stop);
+      btn.addEventListener("mouseleave", stop);
+    });
+  }, 0);
 }
 
 function openLifeInput(playerId) {
