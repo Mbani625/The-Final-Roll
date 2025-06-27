@@ -92,10 +92,11 @@ function createPlayer(playerId) {
     buttons.forEach((btn) => {
       const amount = btn.textContent.includes("+") ? 1 : -1;
 
-      const start = () => {
+      const start = (e) => {
+        e.preventDefault(); // Prevent ghost taps or zoom on mobile
         if (!btn.dataset.holding) {
-          startLifeAdjust(playerId, amount);
           btn.dataset.holding = "true";
+          startLifeAdjust(playerId, amount);
         }
       };
 
@@ -106,7 +107,7 @@ function createPlayer(playerId) {
         }
       };
 
-      btn.addEventListener("touchstart", start, { passive: true });
+      btn.addEventListener("touchstart", start);
       btn.addEventListener("touchend", stop);
       btn.addEventListener("mousedown", start);
       btn.addEventListener("mouseup", stop);
@@ -173,23 +174,26 @@ function adjustLife(playerId, amount) {
 
 // Rapidly Adjust Life on Hold (Now Works on PC & Mobile)
 let interval = null;
-let holdTime = 500; // Start with 500ms delay (slower at first)
-let tapDelay = 250; // Prevents accidental double inputs on tap
+let holdTimeout = null;
+let holdTime = 500;
 
 function startLifeAdjust(playerId, amount) {
+  // Start with one change on press
   adjustLife(playerId, amount);
 
-  holdTime = 500; // Reset speed delay
+  holdTime = 500;
 
-  interval = setTimeout(function repeat() {
+  // Begin acceleration after short delay
+  holdTimeout = setTimeout(function repeat() {
     adjustLife(playerId, amount);
-    holdTime = Math.max(holdTime * 0.85, 100); // Gradually speed up but cap at 100ms
+    holdTime = Math.max(holdTime * 0.85, 100);
     interval = setTimeout(repeat, holdTime);
-  }, holdTime);
+  }, 400); // Delay before starting repeat (prevents quick double tap)
 }
 
 function stopLifeAdjust() {
   clearTimeout(interval);
+  clearTimeout(holdTimeout);
 }
 
 // Updated to prevent double input on tap
