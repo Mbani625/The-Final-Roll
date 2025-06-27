@@ -1,36 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Final Roll</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>The Final Roll</h1>
-            <button id="menu-toggle" class="menu-button">☰ Menu</button>
-        </header>
-
-        <!-- Collapsible Menu -->
-        <div id="menu-container" class="menu">
-            <button class="game-mode-button" onclick="setGameMode('mtg')">MtG</button>
-            <button class="game-mode-button" onclick="setGameMode('edh')">EDH</button>
-            <button class="game-mode-button" onclick="setGameMode('lorcana')">Lorcana</button>
-            <button class="game-mode-button" onclick="setGameMode('yugioh')">Yu-Gi-Oh!</button>
-            <button class="game-mode-button" onclick="setGameMode('grand_archive')">Grand Archive</button>
-            <button class="game-mode-button" onclick="setGameMode('sorcery')">Sorcery</button>
-            <button class="game-mode-button" onclick="initializeGame(2)">1v1 Mode</button>
-            <button class="game-mode-button" onclick="initializeGame(4)">4-Player Mode</button>
-            <button id="dark-mode-toggle" class="game-mode-button">🌙 Dark Mode</button>
+      <header class="site-header">
+        <h1 class="site-title">The Final Roll</h1>
+        <button id="reset-game" class="reset-button">Reset</button>
+        <div class="menu-wrapper">
+          <button id="menu-toggle" class="menu-button">☰ Menu</button>
+          <div id="menu-container" class="menu">
+            <button class="game-mode-button" onclick="initializeGame(2)">
+              1v1 Mode
+            </button>
+            <button class="game-mode-button" onclick="initializeGame(4)">
+              4-Player Mode
+            </button>
+            <hr class="menu-separator" />
+            <button class="game-mode-button" onclick="setGameMode('mtg')">
+              MtG
+            </button>
+            <button class="game-mode-button" onclick="setGameMode('edh')">
+              EDH
+            </button>
+            <button class="game-mode-button" onclick="setGameMode('lorcana')">
+              Lorcana
+            </button>
+            <button class="game-mode-button" onclick="setGameMode('yugioh')">
+              Yu-Gi-Oh!
+            </button>
+            <button
+              class="game-mode-button"
+              onclick="setGameMode('grand_archive')"
+            >
+              Grand Archive
+            </button>
+            <button class="game-mode-button" onclick="setGameMode('sorcery')">
+              Sorcery
+            </button>
+            <button id="dark-mode-toggle" class="game-mode-button">
+              🌙 Dark Mode
+            </button>
+          </div>
         </div>
+      </header>
 
-        <div id="players-container" class="players-grid"></div>
+      <div id="players-container" class="players-grid"></div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
-
-

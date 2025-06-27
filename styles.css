@@ -1,356 +1,417 @@
 /* Global styles */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    color: #222;
-    margin: 0;
-    padding: 0;
-    touch-action: manipulation;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  color: #222;
+  margin: 0;
+  padding: 0;
+  touch-action: manipulation;
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+  position: relative;
+  margin-bottom: 10px;
+  z-index: 101;
+  background-color: inherit;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Keep title and button layout clean */
+.site-title {
+  font-size: 1.5em;
+  margin: 0;
 }
 
 /* Dark Mode */
 .dark-mode {
-    background-color: #222;
-    color: #f4f4f4;
+  background-color: #222;
+  color: #f4f4f4;
 }
 
-/* Collapsible Menu */
+.reset-button {
+  padding: 10px 16px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  background: #d3d3d3;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  margin: 0 10px;
+}
+
+.reset-button:hover {
+  transform: translateY(-2px);
+  background-color: #bbb;
+}
+
+.dark-mode .reset-button {
+  background: #555;
+  color: white;
+}
+
+/* Wrap the menu button and menu content together */
+.menu-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* align menu to the right edge of the button */
+}
+
+/* Actual dropdown menu */
 .menu {
-    display: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    transition: all 0.3s ease-in-out;
+  position: absolute;
+  top: 100%; /* position directly below the menu button */
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 100;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
+/* Show dropdown */
 .menu.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    margin: auto;
-    padding: 10px;
+  display: flex;
 }
 
 /* Menu Button */
 .menu-button {
-    padding: 10px 16px;
-    font-size: 1em;
-    font-weight: bold;
-    border: none;
-    background: #e0e0e0;
-    cursor: pointer;
-    border-radius: 12px;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px 16px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .menu-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode .menu-button {
-    background: #666;
-    color: white;
+  background: #666;
+  color: white;
+}
+
+.menu-separator {
+  width: 100%;
+  border: none;
+  height: 1px;
+  background-color: #888;
+  margin: 8px 0;
+  opacity: 0.5;
+}
+
+.dark-mode .menu-separator {
+  background-color: #ccc;
+  opacity: 0.3;
 }
 
 /* Game Mode Buttons Inside Menu */
 .game-mode-button {
-    padding: 10px 16px;
-    font-size: 1em;
-    font-weight: bold;
-    border: none;
-    background: #e0e0e0;
-    cursor: pointer;
-    border-radius: 12px;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
+  margin: 5px;
+  padding: 10px 16px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 250px;
+  text-align: center;
 }
 
 .game-mode-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode .game-mode-button {
-    background: #666;
-    color: white;
+  background: #666;
+  color: white;
 }
 
 /* Fixing Player Grid Layout */
 .players-grid {
-    display: grid;
-    gap: 15px;
-    margin: 20px auto;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  display: grid;
+  gap: 15px;
+  margin: 20px auto;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* 1v1 Mode */
 .players-grid.players-2 {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(2, auto);
-    max-width: 300px;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, auto);
+  max-width: 300px;
 }
 
 /* 4-Player Mode */
 .players-grid.players-4 {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, auto);
-    max-width: 600px;
-    justify-content: center;
-    margin: auto;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  max-width: 600px;
+  justify-content: center;
+  margin: auto;
 }
 
 /* Player Containers */
 .player {
-    width: 400px;
-    height: fit-content;
-    border: 2px solid #444;
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    justify-content: space-between;
-    justify-self: center;
+  width: 400px;
+  height: fit-content;
+  border: 2px solid #444;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  justify-content: space-between;
+  justify-self: center;
 }
 
 .player h2 {
-    margin: 0px auto;
+  margin: 0px auto;
 }
 
 .dark-mode .player {
-    background-color: #333;
-    border-color: #fff;
+  background-color: #333;
+  border-color: #fff;
 }
 
 /* Buttons Inside Player Containers - Ensure Row Layout */
 .buttons {
-    display: flex;
-    flex-direction: row; /* Ensures buttons are in a row */
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 5px;
-    flex-wrap: wrap; /* Prevents overflow on small screens */
+  display: flex;
+  flex-direction: row; /* Ensures buttons are in a row */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  flex-wrap: wrap; /* Prevents overflow on small screens */
 }
 
 /* Life Total */
 .life-total {
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 10px 0;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 0;
 }
 
 /* Life Adjustment Buttons */
 .life-buttons {
-    display: flex;
-    flex-direction: row; /* Keeps +1 / -1 buttons in a row */
-    justify-content: center;
-    gap: 10px;
-    margin-top: 5px;
+  display: flex;
+  flex-direction: row; /* Keeps +1 / -1 buttons in a row */
+  justify-content: center;
+  gap: 10px;
+  margin-top: 5px;
 }
 
 /* +1 / -1 Buttons */
 .life-adjust-button {
-    width: 60px;
-    height: 45px;
-    font-size: 1em;
-    font-weight: bold;
-    border: none;
-    background: #f0f0f0;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  width: 60px;
+  height: 45px;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .life-adjust-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Dark Mode */
 .dark-mode .life-adjust-button {
-    background: #444;
-    color: white;
+  background: #444;
+  color: white;
 }
 
 /* Buttons Row - Now All at the Bottom */
 .player-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 5px;
 }
 
 /* Icon Button Styling */
 .icon-button {
-    width: 45px;
-    height: 45px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    padding: 5px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .icon-button img {
-    width: 100%;
-    height: 100%;
-    max-width: 35px;
-    max-height: 35px;
-    object-fit: contain;
+  width: 100%;
+  height: 100%;
+  max-width: 35px;
+  max-height: 35px;
+  object-fit: contain;
 }
 
 /* Dark Mode: Invert Button Icons */
 .dark-mode .icon-button img {
-    filter: invert(1);
+  filter: invert(1);
 }
 
 /* Life Adjustment Pop-up */
 .life-input-popup {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    text-align: center;
-    width: 250px;
+  position: absolute;
+  top: 250px; /* or adjust based on your header height */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.4);
+  z-index: 9999; /* force it above everything */
+  text-align: center;
+  width: 250px;
+  color: #fff;
 }
 
 .dark-mode .life-input-popup {
-    background: #333;
-    color: white;
+  background: #333;
+  color: white;
 }
 
 /* Mini Calculator Input */
 .life-input-popup input {
-    width: 80%;
-    padding: 8px;
-    font-size: 1.2em;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background: #fff;
+  width: 80%;
+  padding: 8px;
+  font-size: 1.2em;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
 .dark-mode .life-input-popup input {
-    background: #444;
-    color: white;
-    border: 1px solid white;
+  background: #444;
+  color: white;
+  border: 1px solid white;
 }
 
 /* Mini Calculator Buttons */
 .calculator-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  margin-top: 10px;
 }
 
 .calc-button {
-    width: 50px;
-    height: 40px;
-    font-size: 1.2em;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    background: #ddd;
+  width: 50px;
+  height: 40px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  background: #ddd;
 }
 
 .calc-button:hover {
-    background: #bbb;
+  background: #bbb;
 }
 
 .dark-mode .calc-button {
-    background: #666;
-    color: white;
+  background: #666;
+  color: white;
 }
 
 .dark-mode .calc-button:hover {
-    background: #555;
+  background: #555;
 }
 
 /* Close Button */
 .popup-close {
-    margin-top: 10px;
-    background: red;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    border: none;
+  margin-top: 10px;
+  background: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
 }
 
 .popup-close:hover {
-    background: darkred;
+  background: darkred;
 }
 
 /* Inverted Player Style */
 .inverted {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
-    .container {
-        margin: auto 30px;
-    }
-    
-    .player {
-        width: 80%;
-        height: auto;
-        padding: 10px;
-    }
+  .container {
+    margin: auto 30px;
+  }
 
-    .player-buttons {
-        flex-wrap: wrap; /* Prevents overcrowding on small screens */
-        justify-content: center;
-    }
+  .player {
+    width: 80%;
+    height: auto;
+    padding: 10px;
+  }
 
-    .icon-button, .life-adjust-button {
-        width: 30px;
-        height: 30px;
-    }
+  .player-buttons {
+    flex-wrap: wrap; /* Prevents overcrowding on small screens */
+    justify-content: center;
+  }
+
+  .icon-button,
+  .life-adjust-button {
+    width: 30px;
+    height: 30px;
+  }
 }
