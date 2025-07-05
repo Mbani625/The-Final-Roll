@@ -59,7 +59,7 @@ function createPlayer(playerId) {
   playerDiv.dataset.playerId = playerId;
 
   playerDiv.innerHTML = `
-    <h2>Player ${playerId}</h2>
+    <div class="player-name" contenteditable="true" onfocus="this.select()">Player ${playerId}</div>
     <div class="life-total" onclick="openLifeInput(${playerId})">8000</div>
 
     <div class="player-buttons">
